@@ -18,7 +18,7 @@
             </div>
 
             <div id="footer">
-                by Taro Kirameki.
+                by Kakeru Sato.
             </div>
         </div>
     </body>
