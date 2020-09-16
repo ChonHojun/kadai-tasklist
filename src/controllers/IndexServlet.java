@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Message;
+import models.Task;
 import utils.DBUtil;
 
 /**
@@ -41,18 +41,18 @@ public class IndexServlet extends HttpServlet {
             page = Integer.parseInt(request.getParameter("page"));
         } catch(NumberFormatException e) {}
 
-        List<Message> messages = em.createNamedQuery("getAllTasks", Message.class)
+        List<Task> tasks = em.createNamedQuery("getAllTasks", Task.class)
                 .setFirstResult(15 * (page - 1))
                 .setMaxResults(15)
                 .getResultList();
 
-// 全件数を取得
-long messages_count = (long)em.createNamedQuery("getMessagesCount", Long.class)
+        // 全件数を取得
+        long tasks_count = (long)em.createNamedQuery("getTasksCount", Long.class)
                    .getSingleResult();
 
         em.close();
-        request.setAttribute("tasks", messages);
-        request.setAttribute("messages_count", messages_count);     // 全件数
+        request.setAttribute("task", tasks);
+        request.setAttribute("task_count", tasks_count);     // 全件数
         request.setAttribute("page", page);
 
         //フラッシュメッセージ
